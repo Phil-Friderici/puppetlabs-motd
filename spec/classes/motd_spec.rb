@@ -12,19 +12,19 @@ describe 'motd', type: :class do
           family: 'Unknown',
           architecture: 'Unknown',
           release: {
-            major: 'Unknown'
-          }
+            major: 'Unknown',
+          },
         },
         memory: {
           system: {
-            available: 'Unknown'
-          }
+            available: 'Unknown',
+          },
         },
         processors: {
           models: [
             'Unknown',
-          ]
-        }
+          ],
+        },
       }
     end
 
@@ -41,14 +41,23 @@ describe 'motd', type: :class do
     let(:facts) { on_supported_os['redhat-9-x86_64'] }
 
     context 'when neither template or source are specified' do
+      let(:expected_content) do
+        %r{
+          RedHat\s9(?:\.\d+)?\sx86_64\n\n
+          FQDN:\s*foo\.example\.com\s\(\d*\.\d*\.\d*\.\d*\)\n
+          Processor:\s*(Intel\(R\)\sXeon\(R\)|AMD\sRyzen).*\n
+          Kernel:\s*Linux\nMemory\sSize:\s*\d+\.\d+\sGiB
+        }x
+      end
+
       it do
         expect(subject).to contain_File('/etc/motd').with(
           ensure: 'file', backup: 'false',
           # The following Regex checks for the matching content in this comment and allows for two different IP values to be matched after foo.example.com. This is a workaround to ensure that PDK
           # integration testing passes while the MOTD unit tests dont break. The string we are looking for is:
-          # "RedHat 9.3 x86_64\n\nFQDN:         foo.example.com (172.16.254.254 OR 10.109.1.2)\n
+          # "RedHat 9.9 x86_64\n\nFQDN:         foo.example.com (172.16.254.254 OR 10.109.1.2)\n
           # Processor:    (Intel(R) Xeon(R) CPU E5-2667 v3 @ 3.20GHz OR AMD Ryzen 7 PRO 4750U with Radeon Graphic)s\nKernel:       Linux\nMemory Size:  1.44 GiB\n",
-          content: %r{RedHat\s9\.3\sx86_64\n\nFQDN:\s*foo\.example\.com\s\(\d*\.\d*\.\d*\.\d*\)\nProcessor:\s*(Intel\(R\)\sXeon\(R\)|AMD\sRyzen).*\nKernel:\s*Linux\nMemory\sSize:\s*\d+\.\d+\sGiB},
+          content: expected_content,
           owner: 'root', group: 'root', mode: '0644'
         )
       end
@@ -58,7 +67,7 @@ describe 'motd', type: :class do
       let(:params) do
         {
           content: 'Hello!',
-          template: 'motd/spec.epp'
+          template: 'motd/spec.epp',
         }
       end
 
@@ -124,7 +133,7 @@ describe 'motd', type: :class do
       let(:params) do
         {
           issue_content: 'Hello!',
-          issue_template: 'motd/spec.epp'
+          issue_template: 'motd/spec.epp',
         }
       end
 
@@ -166,7 +175,7 @@ describe 'motd', type: :class do
       let(:params) do
         {
           issue_net_content: 'Hello!',
-          issue_net_template: 'motd/spec.epp'
+          issue_net_template: 'motd/spec.epp',
         }
       end
 
@@ -197,19 +206,28 @@ describe 'motd', type: :class do
   end
 
   describe 'On Windows' do
-    let(:facts) { on_supported_os['windows-10-x86_64'] }
+    let(:facts) { on_supported_os['windows-11-x86_64'] }
 
     context 'when neither template or source are specified' do
+      let(:expected_data) do
+        %r{
+          windows\s11\sx64\n\n
+          FQDN:\s*foo.example.com\s\(\d*\.\d*\.\d*\.\d*\)\n
+          Processor:\s*(?:Intel\(R\)\sXeon\(R\)|12th\sGen\sIntel).*\n
+          Kernel:\s*windows\nMemory\sSize:\s*\d+(?:\.\d+)?\s(?:MiB|GiB)
+        }x
+      end
+
       it do
         expect(subject).to contain_Registry_value('HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system\legalnoticetext').with(
           ensure: 'present',
           type: 'string',
           # The following Regex checks for the matching content in this comment and allows for two different IP values to be matched after foo.example.com. This is a workaround to ensure that PDK
           # integration testing passes while the MOTD unit tests dont break. The string we are looking for is:
-          # "windows 10 x64\n\nFQDN:         foo.example.com (172.16.254.254)\nProcessor:    Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz\nKernel:       windows\nMemory Size:  14.34 GiB\n",
+          # "windows 11 x64\n\nFQDN:         foo.example.com (172.16.254.254)\nProcessor:    Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz\nKernel:       windows\nMemory Size:  14.34 GiB\n",
           # or
-          # "windows 10 x64\n\nFQDN:         foo.example.com (172.16.254.254)\nProcessor:    12th Gen Intel(R) Core(TM) i9-12900K\nKernel:       windows\nMemory Size:  1.53 GiB"
-          data: %r{windows\s10\sx64\n\nFQDN:\s*foo.example.com\s\(\d*\.\d*\.\d*\.\d*\)\nProcessor:\s*(?:Intel\(R\)\sXeon\(R\)|12th\sGen\sIntel).*\nKernel:\s*windows\nMemory\sSize:\s*\d+\.\d+\sGiB},
+          # "windows 11 x64\n\nFQDN:         foo.example.com (172.16.254.254)\nProcessor:    12th Gen Intel(R) Core(TM) i9-12900K\nKernel:       windows\nMemory Size:  1.53 GiB"
+          data: expected_data,
         )
       end
     end
@@ -218,7 +236,7 @@ describe 'motd', type: :class do
       let(:params) do
         {
           content: 'Hello!',
-          windows_motd_title: 'This is the title.'
+          windows_motd_title: 'This is the title.',
         }
       end
 
@@ -252,23 +270,23 @@ describe 'motd', type: :class do
           architecture: 'amd64',
           release: {
             full: '11',
-            major: '11'
-          }
+            major: '11',
+          },
         },
         networking: {
           fqdn: 'test.example.com',
-          ip: '123.23.243.1'
+          ip: '123.23.243.1',
         },
         memory: {
           system: {
-            available: '16.00 GB'
-          }
+            available: '16.00 GB',
+          },
         },
         processors: {
           models: [
             'intel',
-          ]
-        }
+          ],
+        },
       }
     end
 
@@ -286,7 +304,7 @@ describe 'motd', type: :class do
       let(:params) do
         {
           content: 'Hello!',
-          template: 'motd/spec.epp'
+          template: 'motd/spec.epp',
         }
       end
 
@@ -335,23 +353,23 @@ describe 'motd', type: :class do
           family: 'AIX',
           architecture: 'PowerPC_POWER8',
           release: {
-            full: '7100-04-02-1614'
-          }
+            full: '7100-04-02-1614',
+          },
         },
         networking: {
           fqdn: 'test.example.com',
-          ip: '123.23.243.1'
+          ip: '123.23.243.1',
         },
         memory: {
           system: {
-            available: '16.00 GB'
-          }
+            available: '16.00 GB',
+          },
         },
         processors: {
           models: [
             'PowerPC_POWER8',
-          ]
-        }
+          ],
+        },
       }
     end
 

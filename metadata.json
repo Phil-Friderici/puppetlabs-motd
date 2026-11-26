@@ -21,38 +21,23 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7",
         "8",
-        "9"
-      ]
-    },
-    {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "7",
-        "8",
-        "9"
+        "9",
+        "10"
       ]
     },
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "7",
-        "9"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
+        "8"
       ]
     },
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "10",
         "11",
-        "12"
+        "12",
+        "13"
       ]
     },
     {
@@ -65,45 +50,58 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "18.04",
-        "20.04",
         "22.04",
-        "24.04"
+        "24.04",
+        "26.04"
       ]
     },
     {
       "operatingsystem": "Windows",
       "operatingsystemrelease": [
-        "2012 R2",
         "2016",
         "2019",
         "2022",
-        "10"
+        "2025",
+        "11"
+      ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [
+        "41"
+      ]
+    },
+    {
+      "operatingsystem": "Amazon",
+      "operatingsystemrelease": [
+        "2023"
       ]
     },
     {
       "operatingsystem": "Rocky",
       "operatingsystemrelease": [
         "8",
-        "9"
+        "9",
+        "10"
       ]
     },
     {
       "operatingsystem": "AlmaLinux",
       "operatingsystemrelease": [
         "8",
-        "9"
+        "9",
+        "10"
       ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 8.0.0 < 10.0.0"
+      "version_requirement": ">= 9.0.0 < 10.0.0"
     }
   ],
   "description": "This module simply manages /etc/motd or the Windows Logon Message as a template, showing interpolation of system attributes",
   "template-url": "https://github.com/puppetlabs/pdk-templates.git#main",
-  "template-ref": "heads/main-0-g5c7dd04",
-  "pdk-version": "3.5.1"
+  "template-ref": "heads/main-0-g29e9a35",
+  "pdk-version": "4.0.1"
 }

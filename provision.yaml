@@ -1,81 +1,60 @@
----
 default:
   provisioner: docker
   images:
-  - litmusimage/centos:7
+  - litmusimage/ubuntu:22.04
 vagrant:
   provisioner: vagrant
   images:
-  - centos/7
-  - generic/ubuntu1804
-  - gusztavvargadr/windows-server
+  - generic/ubuntu2204
+  - generic/ubuntu2404
+  - gusztavvargadr/windows-server-2022-standard
 docker_deb:
   provisioner: docker
   images:
-  - litmusimage/debian:8
-  - litmusimage/debian:9
-  - litmusimage/debian:10
-docker_ub_6:
+  - litmusimage/debian:11
+  - litmusimage/debian:12
+  - litmusimage/debian:13
+docker_ubuntu:
   provisioner: docker
   images:
-  - litmusimage/ubuntu:14.04
-  - litmusimage/ubuntu:16.04
-  - litmusimage/ubuntu:18.04
-  - litmusimage/ubuntu:20.04
-docker_el7:
+  - litmusimage/ubuntu:22.04
+  - litmusimage/ubuntu:24.04
+  - litmusimage/ubuntu:26.04
+docker_el:
   provisioner: docker
   images:
-  - litmusimage/centos:7
-  - litmusimage/oraclelinux:7
-  - litmusimage/scientificlinux:7
-docker_el8:
-  provisioner: docker
-  images:
-  - litmusimage/centos:8
-release_checks_6:
+  - litmusimage/rockylinux:8
+  - litmusimage/rockylinux:9
+  - litmusimage/rockylinux:10
+  - litmusimage/almalinux:8
+  - litmusimage/almalinux:9
+  - litmusimage/almalinux:10
+  - litmusimage/oraclelinux:8
+release_checks_9:
   provisioner: abs
   images:
-  - redhat-6-x86_64
-  - redhat-7-x86_64
   - redhat-8-x86_64
-  - centos-6-x86_64
-  - centos-7-x86_64
-  - centos-8-x86_64
-  - oracle-5-x86_64
-  - oracle-6-x86_64
-  - oracle-7-x86_64
-  - scientific-6-x86_64
-  - scientific-7-x86_64
-  - debian-8-x86_64
-  - debian-9-x86_64
-  - debian-10-x86_64
+  - redhat-9-x86_64
+  - redhat-10-x86_64
+  - oracle-8-x86_64
+  - debian-11-x86_64
+  - debian-12-x86_64
+  - debian-13-x86_64
   - sles-12-x86_64
   - sles-15-x86_64
-  - ubuntu-1404-x86_64
-  - ubuntu-1604-x86_64
-  - ubuntu-1804-x86_64
-  - ubuntu-2004-x86_64
-  - win-2008r2-x86_64
-  - win-2012r2-x86_64
+  - ubuntu-2204-x86_64
+  - ubuntu-2404-x86_64
+  - ubuntu-2604-x86_64
+  - rockylinux-8-x86_64
+  - rockylinux-9-x86_64
+  - rockylinux-10-x86_64
+  - almalinux-8-x86_64
+  - almalinux-9-x86_64
+  - almalinux-10-x86_64
+  - amazon-2023-x86_64
+  - fedora-41-x86_64
   - win-2016-core-x86_64
   - win-2019-core-x86_64
-  - win-10-pro-x86_64
-release_checks_7:
-  provisioner: abs
-  images:
-  - redhat-7-x86_64
-  - redhat-8-x86_64
-  - centos-7-x86_64
-  - centos-8-x86_64
-  - oracle-7-x86_64
-  - scientific-7-x86_64
-  - debian-9-x86_64
-  - debian-10-x86_64
-  - sles-12-x86_64
-  - sles-15-x86_64
-  - ubuntu-1804-x86_64
-  - ubuntu-2004-x86_64
-  - win-2012r2-x86_64
-  - win-2016-core-x86_64
-  - win-2019-core-x86_64
-  - win-10-pro-x86_64
+  - win-2022-core-x86_64
+  - win-2025-core-x86_64
+  - win-11-enterprise-x86_64

@@ -10,7 +10,7 @@ describe 'Message of the day' do
         }
     PUPPETCODE
 
-    it do
+    it 'manages the static content message', :aggregate_failures do
       idempotent_apply(pp)
 
       unless os[:family] == 'windows'
@@ -27,7 +27,7 @@ describe 'Message of the day' do
         }
     PUPPETCODE
 
-    it do
+    it 'manages the static template message', :aggregate_failures do
       idempotent_apply(pp)
 
       unless os[:family] == 'windows'
@@ -45,7 +45,7 @@ describe 'Message of the day' do
         }
     PUPPETCODE
 
-    it do
+    it 'manages the static issue content message', :aggregate_failures do
       idempotent_apply(pp)
 
       unless os[:family] == 'windows'
@@ -63,7 +63,7 @@ describe 'Message of the day' do
         }
     PUPPETCODE
 
-    it do
+    it 'manages the static issue template message', :aggregate_failures do
       idempotent_apply(pp)
 
       unless os[:family] == 'windows'
@@ -81,7 +81,7 @@ describe 'Message of the day' do
         }
     PUPPETCODE
 
-    it do
+    it 'manages the static issue.net content message', :aggregate_failures do
       idempotent_apply(pp)
 
       unless os[:family] == 'windows'
@@ -99,7 +99,7 @@ describe 'Message of the day' do
         }
     PUPPETCODE
 
-    it do
+    it 'manages the static issue.net template message', :aggregate_failures do
       idempotent_apply(pp)
 
       unless os[:family] == 'windows'
@@ -117,7 +117,7 @@ describe 'Message of the day' do
         }
     PUPPETCODE
 
-    it do
+    it 'disables dynamic MOTD settings on Debian', :aggregate_failures do
       idempotent_apply(pp)
 
       unless os[:family] == 'windows'

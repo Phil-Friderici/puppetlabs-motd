@@ -12,3 +12,9 @@
 RSpec/NamedSubject:
   Exclude:
     - 'spec/classes/motd_spec.rb'
+
+# Offense count: 7
+# The acceptance examples check several file properties per apply run.
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/acceptance/motd_spec.rb'
